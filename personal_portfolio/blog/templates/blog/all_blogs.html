@@ -1,0 +1,30 @@
+{% extends "portfolio/base.html" %}
+{% block content %}
+<h1>Welcome to my blog page</h1>
+{% for blog in page_obj %}
+<div class="row">
+    <div class="shadow p-3 mb-5 bg-body-tertiary rounded">
+<h2><a href="{% url 'blog:posts' blog.id %}">{{blog.title}}</a></h2>
+<h3>{{blog.author}}</h3>
+<h3>{{blog.date_posted|date}}</h3>
+<p>{{blog.content|truncatechars:100}}</p>
+</div></div>
+{% endfor %}
+<div class="pagination">
+    <span class="step-links">
+        {% if page_obj.has_previous %}
+            <a class="btn btn-info" href="?page=1">&laquo; first</a>
+            <a class="btn btn-info" href="?page={{ page_obj.previous_page_number }}">previous</a>
+        {% endif %}
+
+        <span class="current">
+            Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}.
+        </span>
+
+        {% if page_obj.has_next %}
+            <a class="btn btn-info" href="?page={{ page_obj.next_page_number }}">next</a>
+            <a class="btn btn-info" href="?page={{ page_obj.paginator.num_pages }}">last &raquo;</a>
+        {% endif %}
+    </span>
+</div>
+{% endblock  %}

@@ -1,0 +1,23 @@
+
+{% extends "portfolio/base.html" %}
+{% block content %}
+{% load static %}
+<br><br>
+<img class="rounded mx-auto d-block" width='500' src="{% static 'portfolio/family.jpg' %}">
+<a href="{% static 'portfolio/resume.pdf' %}">resume</a>
+<div class="container">
+<div class="row">
+  
+    {% for project in projects %}
+    <div class="col-md-4">
+        <h1>{{project.title}}</h1>
+<img src="{{project.image.url}}" width='350px' height='200px'><br>
+
+<p>{{project.description}}<p>
+{% if project.url %}   
+<a href="{{project.url}}">Link</a>
+{% endif %}
+</div>
+{% endfor %}
+{% endblock  %}
+</div></div>
